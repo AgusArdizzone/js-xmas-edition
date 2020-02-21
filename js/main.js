@@ -20,9 +20,10 @@ function validarFormulario(event){
     if(esExito){
         $form.className = "oculto";
         document.querySelector("#exito").className = "";
+        setTimeout(function(){window.location.href = "wishlist.html" },5000)
     }
 
-
+    
     event.preventDefault();
 }
 
@@ -32,24 +33,30 @@ function manejarErrores (errores){
     const keys = Object.keys(errores);
     console.log(keys);
 
+    document.querySelector("#errores").innerText = "";
+
     keys.forEach(function(key){
         const error = (errores[key]);
         const $errors = document.querySelector("#errores");
-
+        
         if(error){
             hayErrores++;
             $form[key].className = "error";
-
+            
+            
             const $error = document.createElement("li");
             $error.innerText = error;
+            $error.id = "errorCampo";
             $errors.appendChild($error);
+            
         }else{
-            //si existe el error, borrarlo aca
             $form[key].className = "";
         }
     })
     return hayErrores;
 }
+
+
 
 function validarNombre(nombre){
     if(nombre.length=== 0){
